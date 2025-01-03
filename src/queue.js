@@ -2,32 +2,43 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 // const { ListNode } = require('../extensions/list-node.js');
 
-/**
- * Implement the Queue with a given interface via linked list (use ListNode extension above).
- *
- * @example
- * const queue = new Queue();
- *
- * queue.enqueue(1); // adds the element to the queue
- * queue.enqueue(3); // adds the element to the queue
- * queue.dequeue(); // returns the top element from queue and deletes it, returns 1
- * queue.getUnderlyingList() // returns { value: 3, next: null }
- */
+class ListNode {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
 class Queue {
+  constructor() {
+    this.head = null; // Начало очереди
+    this.tail = null; // Конец очереди
+  }
 
+  // Метод для получения связного списка
   getUnderlyingList() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.head; // Возвращаем начало очереди, которая представляет весь список
   }
 
-  enqueue(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  // Метод для добавления элемента в очередь
+  enqueue(value) {
+    const newNode = new ListNode(value); // Создаем новый узел
+    if (!this.tail) { // Если очередь пуста
+      this.head = newNode; // Начало очереди становится новым узлом
+      this.tail = newNode; // Конец очереди также становится новым узлом
+    } else {
+      this.tail.next = newNode; // Добавляем новый узел в конец очереди
+      this.tail = newNode; // Обновляем указатель на конец очереди
+    }
   }
 
+  // Метод для удаления элемента из начала очереди
   dequeue() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.head) return null; // Если очередь пуста, возвращаем null
+    const value = this.head.value; // Сохраняем значение первого узла
+    this.head = this.head.next; // Сдвигаем начало очереди на следующий узел
+    if (!this.head) this.tail = null; // Если очередь опустела, сбрасываем tail
+    return value; // Возвращаем удаленное значение
   }
 }
 

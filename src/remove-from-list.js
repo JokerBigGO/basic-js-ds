@@ -1,32 +1,38 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
-
 /**
- * Given a singly linked list of integers l and an integer k,
- * remove all elements from list l that have a value equal to k.
- *
- * @param {List} l
- * @param {Number} k
- * @return {List}
+ * Implement the Stack with a given interface via array.
  *
  * @example
- * For l = [3, 1, 2, 3, 4, 5] and k = 3,
- * the output should be [1, 2, 4, 5]
+ * const stack = new Stack();
  *
- * Singly - linked lists are already defined using interface
- * class ListNode {
- *   constructor(x) {
- *     this.value = x;
- *     this.next = null;
- *   }
- * }
+ * stack.push(1); // adds the element to the stack
+ * stack.peek(); // returns the peek, but doesn't delete it, returns 1
+ * stack.pop(); // returns the top element from stack and deletes it, returns 1
+ * stack.pop(); // undefined
+ *
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+class Stack {
+  constructor() {
+    this.items = []; // Масив для збереження елементів стеку
+  }
+
+  // Додає елемент до стеку
+  push(element) {
+    this.items.push(element);
+  }
+
+  // Видаляє та повертає верхній елемент стеку
+  pop() {
+    return this.items.pop();
+  }
+
+  // Повертає верхній елемент стеку без його видалення
+  peek() {
+    return this.items[this.items.length - 1];
+  }
 }
 
 module.exports = {
-  removeKFromList
+  Stack
 };
